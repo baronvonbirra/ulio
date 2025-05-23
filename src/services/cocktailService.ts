@@ -26,13 +26,17 @@ export interface Category {
 }
 
 // Type assertion for the imported data
-const categories: Category[] = cocktailsData as Category[];
+const categories: Category[] = cocktailsData.categories as Category[];
 
 /**
  * Returns an array of all categories.
  * Each category object includes its name and icon placeholder.
  */
 export const getAllCategories = (): Category[] => {
+   if (!Array.isArray(categories)) {
+    console.error("Data format error: categories is not an array. Check cocktails.json or the data import.", categories);
+    return []; 
+  }
   return categories.map(category => ({
     name: category.name,
     icon_placeholder: category.icon_placeholder,
