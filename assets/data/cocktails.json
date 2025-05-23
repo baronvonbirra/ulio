@@ -1,0 +1,196 @@
+{
+  "categories": [
+    {
+      "name": "Rum",
+      "icon_placeholder": "rum_category_icon.png",
+      "cocktails": [
+        {
+          "name": "Mojito",
+          "image_placeholder": "mojito.jpg",
+          "description": "A refreshing Cuban classic, the Mojito blends white rum with the vibrant flavors of fresh mint, lime juice, sugar, and a splash of soda water. Perfect for a hot summer day.",
+          "ingredients": [
+            {"name": "White Rum", "amount": "2", "unit": "oz"},
+            {"name": "Fresh Lime Juice", "amount": "1", "unit": "oz"},
+            {"name": "Simple Syrup", "amount": "0.75", "unit": "oz"},
+            {"name": "Mint Leaves", "amount": "8-10", "unit": "leaves"},
+            {"name": "Soda Water", "amount": "Top with", "unit": ""}
+          ],
+          "instructions": [
+            "In a sturdy glass, gently muddle the mint leaves with simple syrup. Do not shred the mint.",
+            "Add the rum and lime juice to the glass.",
+            "Fill the glass with crushed ice.",
+            "Top with soda water.",
+            "Gently stir to combine all ingredients.",
+            "Garnish with a mint sprig and a lime wheel."
+          ],
+          "garnish": "Mint sprig and lime wheel",
+          "glassware": "Highball glass"
+        },
+        {
+          "name": "Daiquiri",
+          "image_placeholder": "daiquiri.jpg",
+          "description": "The classic Daiquiri is a simple yet elegant cocktail, showcasing the clean taste of rum balanced by the tartness of lime and the sweetness of sugar. A true test of a bartender's skill.",
+          "ingredients": [
+            {"name": "White Rum", "amount": "2", "unit": "oz"},
+            {"name": "Fresh Lime Juice", "amount": "1", "unit": "oz"},
+            {"name": "Simple Syrup", "amount": "0.75", "unit": "oz"}
+          ],
+          "instructions": [
+            "Add all ingredients to a shaker with ice.",
+            "Shake well until thoroughly chilled (about 15 seconds).",
+            "Strain into a chilled coupe or cocktail glass.",
+            "Garnish with a lime wheel or twist, if desired."
+          ],
+          "garnish": "Lime wheel (optional)",
+          "glassware": "Coupe or Cocktail glass"
+        }
+      ]
+    },
+    {
+      "name": "Whiskey",
+      "icon_placeholder": "whiskey_category_icon.png",
+      "cocktails": [
+        {
+          "name": "Old Fashioned",
+          "image_placeholder": "old_fashioned.jpg",
+          "description": "A timeless classic, the Old Fashioned is a sophisticated blend of whiskey (typically bourbon or rye), sugar, and bitters, garnished with an orange peel or cherry.",
+          "ingredients": [
+            {"name": "Bourbon or Rye Whiskey", "amount": "2", "unit": "oz"},
+            {"name": "Sugar Cube", "amount": "1", "unit": ""},
+            {"name": "Angostura Bitters", "amount": "2-3", "unit": "dashes"},
+            {"name": "Water", "amount": "1", "unit": "tsp (optional)"}
+          ],
+          "instructions": [
+            "Place the sugar cube in an old fashioned glass.",
+            "Saturate it with Angostura bitters and add a teaspoon of water if desired.",
+            "Muddle the sugar cube until dissolved.",
+            "Fill the glass with one large ice cube or several smaller ones.",
+            "Add the whiskey.",
+            "Gently stir for about 30 seconds to chill and slightly dilute.",
+            "Express the oils from an orange peel over the drink, then drop it in or discard.",
+            "Garnish with an orange peel and optionally a cocktail cherry."
+          ],
+          "garnish": "Orange peel and cocktail cherry (optional)",
+          "glassware": "Old Fashioned glass (Rocks glass)"
+        },
+        {
+          "name": "Whiskey Sour",
+          "image_placeholder": "whiskey_sour.jpg",
+          "description": "A popular and historic cocktail, the Whiskey Sour combines whiskey, lemon juice, sugar, and optionally a dash of egg white for a frothy texture.",
+          "ingredients": [
+            {"name": "Whiskey", "amount": "2", "unit": "oz"},
+            {"name": "Fresh Lemon Juice", "amount": "0.75", "unit": "oz"},
+            {"name": "Simple Syrup", "amount": "0.75", "unit": "oz"},
+            {"name": "Egg White", "amount": "1/2", "unit": "oz (optional)"}
+          ],
+          "instructions": [
+            "If using egg white, combine whiskey, lemon juice, simple syrup, and egg white in a shaker. Dry shake (without ice) vigorously for about 15 seconds.",
+            "Add ice to the shaker and shake again until well-chilled (another 15 seconds).",
+            "If not using egg white, combine whiskey, lemon juice, and simple syrup in a shaker with ice. Shake well until chilled.",
+            "Strain into a chilled coupe or over fresh ice in a rocks glass.",
+            "Garnish with an orange slice and a cherry, if desired."
+          ],
+          "garnish": "Orange slice and cherry (optional)",
+          "glassware": "Coupe or Rocks glass"
+        }
+      ]
+    },
+    {
+      "name": "Vodka",
+      "icon_placeholder": "vodka_category_icon.png",
+      "cocktails": [
+        {
+          "name": "Moscow Mule",
+          "image_placeholder": "moscow_mule.jpg",
+          "description": "A buck or mule cocktail, the Moscow Mule is a refreshing mix of vodka, spicy ginger beer, and lime juice, traditionally served in a copper mug.",
+          "ingredients": [
+            {"name": "Vodka", "amount": "2", "unit": "oz"},
+            {"name": "Fresh Lime Juice", "amount": "0.5", "unit": "oz"},
+            {"name": "Ginger Beer", "amount": "4-6", "unit": "oz (to top)"}
+          ],
+          "instructions": [
+            "Squeeze lime juice into a copper mug (or highball glass).",
+            "Add vodka.",
+            "Fill the mug with ice.",
+            "Top with ginger beer.",
+            "Gently stir.",
+            "Garnish with a lime wedge."
+          ],
+          "garnish": "Lime wedge",
+          "glassware": "Copper mug or Highball glass"
+        },
+        {
+          "name": "Cosmopolitan",
+          "image_placeholder": "cosmopolitan.jpg",
+          "description": "A sophisticated and popular cocktail, the Cosmopolitan blends vodka, triple sec, cranberry juice, and freshly squeezed lime juice for a vibrant pink hue and a balanced sweet-tart flavor.",
+          "ingredients": [
+            {"name": "Citrus Vodka", "amount": "1.5", "unit": "oz"},
+            {"name": "Cointreau (or other Triple Sec)", "amount": "0.75", "unit": "oz"},
+            {"name": "Cranberry Juice", "amount": "0.75", "unit": "oz"},
+            {"name": "Fresh Lime Juice", "amount": "0.5", "unit": "oz"}
+          ],
+          "instructions": [
+            "Add all ingredients into a shaker with ice.",
+            "Shake well until thoroughly chilled.",
+            "Strain into a chilled cocktail glass (martini glass).",
+            "Garnish with a lime wedge or a flamed orange peel."
+          ],
+          "garnish": "Lime wedge or flamed orange peel",
+          "glassware": "Cocktail glass (Martini glass)"
+        }
+      ]
+    },
+    {
+      "name": "Gin",
+      "icon_placeholder": "gin_category_icon.png",
+      "cocktails": [
+        {
+          "name": "Gin and Tonic",
+          "image_placeholder": "gin_and_tonic.jpg",
+          "description": "The quintessential Gin and Tonic is a simple, refreshing highball made with gin and tonic water, often garnished with a lime wedge or slice.",
+          "ingredients": [
+            {"name": "Gin", "amount": "2", "unit": "oz"},
+            {"name": "Tonic Water", "amount": "4-6", "unit": "oz (to top)"},
+            {"name": "Lime Wedge", "amount": "1", "unit": ""}
+          ],
+          "instructions": [
+            "Fill a highball glass or a large wine glass (Copa de Balon) with ice.",
+            "Add the gin.",
+            "Top with tonic water.",
+            "Gently stir.",
+            "Squeeze the lime wedge over the drink and drop it in."
+          ],
+          "garnish": "Lime wedge or slice",
+          "glassware": "Highball glass or Copa de Balon"
+        }
+      ]
+    },
+    {
+      "name": "Non-Alcoholic",
+      "icon_placeholder": "non_alcoholic_category_icon.png",
+      "cocktails": [
+        {
+          "name": "Virgin Mojito",
+          "image_placeholder": "virgin_mojito.jpg",
+          "description": "All the refreshing flavors of a classic Mojito without the alcohol. Fresh mint, lime, sugar, and soda water make for a delightful mocktail.",
+          "ingredients": [
+            {"name": "Fresh Lime Juice", "amount": "1", "unit": "oz"},
+            {"name": "Simple Syrup", "amount": "0.75", "unit": "oz"},
+            {"name": "Mint Leaves", "amount": "8-10", "unit": "leaves"},
+            {"name": "Soda Water (or Lemon-Lime Soda)", "amount": "Top with", "unit": ""}
+          ],
+          "instructions": [
+            "In a sturdy glass, gently muddle the mint leaves with simple syrup.",
+            "Add the lime juice.",
+            "Fill the glass with crushed ice.",
+            "Top with soda water or lemon-lime soda.",
+            "Gently stir to combine.",
+            "Garnish with a mint sprig and a lime wheel."
+          ],
+          "garnish": "Mint sprig and lime wheel",
+          "glassware": "Highball glass"
+        }
+      ]
+    }
+  ]
+}
