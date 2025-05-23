@@ -4,7 +4,8 @@ import { useLocalSearchParams, Stack } from 'expo-router';
 import { getCocktailByName, Cocktail, Ingredient } from '@/src/services/cocktailService';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import DynamicImage from '@/components/DynamicImage'; // Import DynamicImage
+import DynamicImage from '@/components/DynamicImage';
+import { Colors } from '@/constants/Colors'; // Import Colors
 
 export default function CocktailDetailScreen() {
   const params = useLocalSearchParams<{ name?: string | string[] }>();
@@ -56,7 +57,7 @@ export default function CocktailDetailScreen() {
               imageType="cocktail"
               style={styles.cocktailDetailImage}
               fallbackContainerStyle={styles.cocktailDetailImageFallback}
-              textStyle={styles.cocktailDetailImageText}
+              textStyle={styles.cocktailDetailImageText} // Fallback text style can be customized here if needed
             />
           )}
 
@@ -66,34 +67,38 @@ export default function CocktailDetailScreen() {
           {/* Description */}
           <ThemedText style={styles.description}>{cocktail.description}</ThemedText>
 
-          {/* Ingredients */}
-          <ThemedText type="subtitle" style={styles.sectionTitle}>Ingredients:</ThemedText>
-          {cocktail.ingredients.map((ingredient: Ingredient, index: number) => (
-            <ThemedText key={index} style={styles.listItem}>
-              - {ingredient.amount} {ingredient.unit} {ingredient.name}
-            </ThemedText>
-          ))}
+          {/* Ingredients Section Card */}
+          <ThemedView style={styles.contentCard}>
+            <ThemedText type="subtitle" style={styles.sectionTitle}>Ingredients:</ThemedText>
+            {cocktail.ingredients.map((ingredient: Ingredient, index: number) => (
+              <ThemedText key={index} style={styles.listItem}>
+                {`• ${ingredient.amount} ${ingredient.unit || ''} ${ingredient.name}`}
+              </ThemedText>
+            ))}
+          </ThemedView>
 
-          {/* Instructions */}
-          <ThemedText type="subtitle" style={styles.sectionTitle}>Instructions:</ThemedText>
-          {cocktail.instructions.map((step: string, index: number) => (
-            <ThemedText key={index} style={styles.listItem}>{`${index + 1}. ${step}`}</ThemedText>
-          ))}
+          {/* Instructions Section Card */}
+          <ThemedView style={styles.contentCard}>
+            <ThemedText type="subtitle" style={styles.sectionTitle}>Instructions:</ThemedText>
+            {cocktail.instructions.map((step: string, index: number) => (
+              <ThemedText key={index} style={styles.listItemInstruction}>{`${index + 1}. ${step}`}</ThemedText>
+            ))}
+          </ThemedView>
 
-          {/* Garnish */}
+          {/* Garnish Section Card (Conditional) */}
           {cocktail.garnish && (
-            <>
+            <ThemedView style={styles.contentCard}>
               <ThemedText type="subtitle" style={styles.sectionTitle}>Garnish:</ThemedText>
               <ThemedText style={styles.listItem}>{cocktail.garnish}</ThemedText>
-            </>
+            </ThemedView>
           )}
 
-          {/* Glassware */}
+          {/* Glassware Section Card (Conditional) */}
           {cocktail.glassware && (
-            <>
+            <ThemedView style={styles.contentCard}>
               <ThemedText type="subtitle" style={styles.sectionTitle}>Glassware:</ThemedText>
               <ThemedText style={styles.listItem}>{cocktail.glassware}</ThemedText>
-            </>
+            </ThemedView>
           )}
         </ThemedView>
       </ScrollView>
@@ -104,7 +109,7 @@ export default function CocktailDetailScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#f8f8f8', // Light gray background for the whole screen
+    backgroundColor: Colors.dark.background, // Use theme background
   },
   scrollView: {
     flex: 1,
@@ -114,50 +119,58 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: Platform.OS === 'android' ? 8 : 20,
   },
-  cocktailDetailImage: { // Styles for the DynamicImage component (Image or Fallback container)
-    width: '100%', // Make it responsive
-    height: 200,    // Fixed height for the detail image
-    marginBottom: 20,
-    borderRadius: 8, // Optional: if you want rounded corners for the image/placeholder
+  cocktailDetailImage: {
+    width: '100%',
+    aspectRatio: 16 / 9, // Aspect ratio for a more cinematic feel
+    borderRadius: 10, // Consistent with cards
+    marginBottom: 25, // Increased space below image
   },
-  cocktailDetailImageFallback: { // Specific styles for the fallback container
-    // backgroundColor is set in DynamicImage, override if needed
-    // width/height are taken from `style` prop (styles.cocktailDetailImage)
-    alignItems: 'center', // Ensure text is centered in the fallback
+  cocktailDetailImageFallback: {
+    alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: Colors.dark.borderColor, // Darker than card background
+    borderRadius: 10, // Match image borderRadius
   },
-  cocktailDetailImageText: { // Specific styles for the fallback text
-    fontSize: 18, // Larger text for detail image fallback
-    // color is set in DynamicImage
+  cocktailDetailImageText: { // Fallback text if needed, though DynamicImage has defaults
+    fontSize: 18,
+    color: Colors.dark.textSecondary,
   },
-  // imagePlaceholderContainer and imagePlaceholderText styles removed as they are no longer used.
   cocktailName: {
-    marginBottom: 10,
     textAlign: 'center',
-    color: '#333', // Dark color for the name
+    marginVertical: 20, // Increased vertical margin
   },
   description: {
-    fontSize: 16,
-    marginBottom: 20,
-    lineHeight: 24, // Improved readability
-    color: '#555',
+    fontSize: 17, // Slightly larger for readability
+    lineHeight: 25, // Adjusted line height
+    marginVertical: 15, // Increased vertical margin
+    textAlign: 'justify', // Justify text for a more formal look
+  },
+  contentCard: {
+    backgroundColor: Colors.dark.cardBackground,
+    borderRadius: 10,
+    padding: 15,
+    marginVertical: 10,
   },
   sectionTitle: {
-    marginTop: 15,
-    marginBottom: 8,
-    fontSize: 18, // Slightly larger for section titles
-    color: '#444',
+    // ThemedText type="subtitle" already applies serif font and good size
+    color: Colors.dark.tint, // Use tint color for section titles
+    marginBottom: 12, // Space below title within card
+    marginTop: 5, // Space above title within card
   },
   listItem: {
     fontSize: 16,
-    marginBottom: 6,
-    marginLeft: 10, // Indent list items
-    lineHeight: 22,
-    color: '#555',
+    lineHeight: 24, // Increased line height
+    marginBottom: 8, // Space between list items
+    // marginLeft is removed, text aligns with card padding
+  },
+  listItemInstruction: { // Specific style for instructions if different needed, e.g. more spacing
+    fontSize: 16,
+    lineHeight: 26, // Slightly more for instructions
+    marginBottom: 10,
   },
   notFoundText: {
     textAlign: 'center',
     marginTop: 30,
-    color: 'red',
+    color: Colors.dark.tint, // Use tint color for themed error message
   },
 });

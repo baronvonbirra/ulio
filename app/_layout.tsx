@@ -1,29 +1,49 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
+import { ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
+import { Platform } from 'react-native'; // Import Platform
+import { Colors } from '@/constants/Colors'; // Import our Colors
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+// Removed useFonts and SpaceMono, assuming new typography is handled by ThemedText
+// Removed useColorScheme, as we are directly applying the dark theme
+
+// Create a custom dark theme object for @react-navigation/native
+const SophisticatedDarkTheme = {
+  dark: true, // Identifies it as a dark theme
+  colors: {
+    primary: Colors.dark.tint, // Primary interactive color
+    background: Colors.dark.background, // Screen background
+    card: Colors.dark.cardBackground, // Header, card backgrounds
+    text: Colors.dark.text, // Default text color
+    border: Colors.dark.borderColor, // Border color
+    notification: Colors.dark.tint, // Notification color (e.g., badges)
+  },
+};
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
-  }
+  // if (!loaded) { // Font loading removed for now
+  //   return null;
+  // }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
+    <ThemeProvider value={SophisticatedDarkTheme}>
+      <Stack
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: Colors.dark.cardBackground,
+          },
+          headerTintColor: Colors.dark.tint, // For back arrow
+          headerTitleStyle: {
+            color: Colors.dark.text,
+            fontFamily: Platform.OS === 'ios' ? 'Georgia' : 'serif',
+          },
+          headerBackTitleVisible: false, // Cleaner look
+        }}>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
-      <StatusBar style="auto" />
+      <StatusBar style="light" /> {/* Set status bar to light content for dark background */}
     </ThemeProvider>
   );
 }
