@@ -1,29 +1,36 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native'; // Import StyleSheet
 
 import { HapticTab } from '@/components/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
+import TabBarBackground from '@/components/ui/TabBarBackground'; // This is likely for blur on iOS
 import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+// Removed useColorScheme as we are directly applying the dark theme
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  // const colorScheme = useColorScheme(); // Forcing dark theme
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: Colors.dark.tabIconSelected,
+        tabBarInactiveTintColor: Colors.dark.tabIconDefault,
         headerShown: false,
         tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
+        tabBarBackground: TabBarBackground, // For iOS blur
         tabBarStyle: Platform.select({
           ios: {
-            // Use a transparent background on iOS to show the blur effect
             position: 'absolute',
+            backgroundColor: 'rgba(30, 30, 30, 0.85)', // Dark, translucent for blur over dark content
+            borderTopWidth: StyleSheet.hairlineWidth,
+            borderTopColor: Colors.dark.borderColor, // Subtle border
           },
-          default: {},
+          default: { // Android, Web
+            backgroundColor: Colors.dark.cardBackground, // Solid dark background
+            borderTopWidth: StyleSheet.hairlineWidth,
+            borderTopColor: Colors.dark.borderColor,
+          },
         }),
       }}>
       <Tabs.Screen

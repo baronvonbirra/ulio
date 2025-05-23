@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, TouchableOpacity, StyleSheet, SafeAreaView, Platform } from 'react-native';
+import { FlatList, Pressable, StyleSheet, SafeAreaView, Platform } from 'react-native'; // Import Pressable
 import { useRouter } from 'expo-router';
 import { getAllCategories, Category } from '@/src/services/cocktailService';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import DynamicImage from '@/components/DynamicImage'; // Updated import path
+import DynamicImage from '@/components/DynamicImage';
+import { Colors } from '@/constants/Colors'; // Import Colors
 
 export default function CategorySelectionScreen() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -27,7 +28,13 @@ export default function CategorySelectionScreen() {
   };
 
   const renderCategoryItem = ({ item }: { item: Category }) => (
-    <TouchableOpacity onPress={() => handleCategoryPress(item.name)} style={styles.itemContainer}>
+    <Pressable
+      onPress={() => handleCategoryPress(item.name)}
+      style={({ pressed }) => [
+        styles.itemContainer,
+        { transform: [{ scale: pressed ? 0.97 : 1 }] }, // Apply scale transform
+      ]}
+    >
       <DynamicImage
         imageName={item.icon_placeholder}
         imageType="category"
@@ -36,7 +43,7 @@ export default function CategorySelectionScreen() {
         textStyle={styles.categoryImageText}
       />
       <ThemedText type="subtitle" style={styles.categoryName}>{item.name}</ThemedText>
-    </TouchableOpacity>
+    </Pressable>
   );
 
   return (
@@ -57,7 +64,7 @@ export default function CategorySelectionScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#f0f0f0', // A light background for the safe area
+    backgroundColor: Colors.dark.background, // Use theme background
   },
   container: {
     flex: 1,
@@ -73,34 +80,28 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   itemContainer: {
-    flexDirection: 'row', // Align image and text horizontally
-    alignItems: 'center', // Center items vertically
-    backgroundColor: 'white',
-    paddingVertical: 10, // Adjusted padding
-    paddingHorizontal: 15, // Adjusted padding
-    borderBottomWidth: 1,
-    borderBottomColor: '#cccccc',
-    marginBottom: 8,
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    elevation: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: Colors.dark.cardBackground,
+    padding: 15, // Uniform padding
+    borderRadius: 10,
+    marginVertical: 8, // Vertical margin for separation
+    marginHorizontal: 10, // Horizontal margin for separation from screen edges
+    elevation: 0, // Kept flat
   },
   categoryImage: {
     width: 40, // Specify size for the image/placeholder
     height: 40,
     marginRight: 15, // Space between image and text
   },
-  categoryImageFallback: { // Style for the View container of the fallback text
+  categoryImageFallback: {
     width: 40,
     height: 40,
-    // backgroundColor is already set in DynamicImage, but can be overridden
+    backgroundColor: Colors.dark.borderColor, // Darker fallback background
   },
-  categoryImageText: { // Style for the fallback text itself
+  categoryImageText: {
     fontSize: 10,
-    // color is already set in DynamicImage
+    color: Colors.dark.textSecondary, // Lighter fallback text
   },
   categoryName: {
     flex: 1, // Allow text to take remaining space

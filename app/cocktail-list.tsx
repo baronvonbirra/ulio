@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, SafeAreaView, Platform } from 'react-native';
+import { View, Text, FlatList, Pressable, StyleSheet, SafeAreaView, Platform } from 'react-native'; // Import Pressable
 import { useLocalSearchParams, useRouter, Stack } from 'expo-router';
 import { getCocktailsByCategory, Cocktail } from '@/src/services/cocktailService';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import DynamicImage from '@/components/DynamicImage'; // Import DynamicImage
+import DynamicImage from '@/components/DynamicImage';
+import { Colors } from '@/constants/Colors'; // Import Colors
 
 export default function CocktailListScreen() {
   const params = useLocalSearchParams<{ categoryName?: string | string[] }>();
@@ -26,7 +27,13 @@ export default function CocktailListScreen() {
   };
 
   const renderCocktailItem = ({ item }: { item: Cocktail }) => (
-    <TouchableOpacity onPress={() => handleCocktailPress(item.name)} style={styles.itemContainer}>
+    <Pressable
+      onPress={() => handleCocktailPress(item.name)}
+      style={({ pressed }) => [
+        styles.itemContainer,
+        { transform: [{ scale: pressed ? 0.97 : 1 }] }, // Apply scale transform
+      ]}
+    >
       <DynamicImage
         imageName={item.image_placeholder}
         imageType="cocktail"
@@ -35,7 +42,7 @@ export default function CocktailListScreen() {
         textStyle={styles.cocktailImageText}
       />
       <ThemedText type="subtitle" style={styles.cocktailName}>{item.name}</ThemedText>
-    </TouchableOpacity>
+    </Pressable>
   );
 
   if (!categoryName) {
@@ -70,7 +77,7 @@ export default function CocktailListScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: Colors.dark.background, // Use theme background
   },
   container: {
     flex: 1,
@@ -81,34 +88,30 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   itemContainer: {
-    flexDirection: 'row', // Align image and text horizontally
-    alignItems: 'center', // Center items vertically
-    backgroundColor: 'white',
-    paddingVertical: 10, // Adjusted padding
-    paddingHorizontal: 15, // Adjusted padding
-    borderBottomWidth: 1,
-    borderBottomColor: '#cccccc',
-    marginBottom: 8,
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    elevation: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: Colors.dark.cardBackground,
+    padding: 15, // Uniform padding
+    borderRadius: 10,
+    marginVertical: 8, // Vertical margin for separation
+    marginHorizontal: 10, // Horizontal margin for separation from screen edges
+    elevation: 0, // Kept flat
   },
-  cocktailImage: { // Styles for the DynamicImage component itself (applies to Image or fallback container)
-    width: 40,
-    height: 40,
+  cocktailImage: {
+    width: 50, // Increased size
+    height: 50, // Increased size
     marginRight: 15,
+    borderRadius: 4, // Optional: slightly rounded corners for the image/placeholder itself
   },
-  cocktailImageFallback: { // Specific styles for the fallback container if needed (e.g. different background)
-    width: 40, // Ensure size consistency
-    height: 40,
-    // backgroundColor is already set in DynamicImage
+  cocktailImageFallback: {
+    width: 50, // Match cocktailImage size
+    height: 50, // Match cocktailImage size
+    backgroundColor: Colors.dark.borderColor,
+    borderRadius: 4, // Match cocktailImage borderRadius
   },
-  cocktailImageText: { // Specific styles for the fallback text
-    fontSize: 10,
-    // color is already set in DynamicImage
+  cocktailImageText: {
+    fontSize: 10, // Keep small for placeholder text
+    color: Colors.dark.textSecondary,
   },
   cocktailName: {
     flex: 1, // Allow text to take remaining space
@@ -118,6 +121,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 20,
     fontSize: 16,
-    color: '#666',
+    color: Colors.dark.textSecondary, // Use theme secondary text color
   },
 });
