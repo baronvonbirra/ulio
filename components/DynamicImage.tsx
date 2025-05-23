@@ -14,10 +14,10 @@ interface DynamicImageProps {
 // Map for known local images. require() needs static paths.
 // Key convention: `${imageType}_${imageName}`
 const localImageMap: Record<string, ImageSourcePropType> = {
-  'category_rum_category_icon.png': require('../../assets/images/categories/rum_category_icon.png'),
-  'category_whiskey_category_icon.png': require('../../assets/images/categories/whiskey_category_icon.png'),
+  'category_rum_category_icon.png': require('../assets/images/categories/rum_category_icon.png'),
+  'category_whiskey_category_icon.png': require('../assets/images/categories/whiskey_category_icon.png'),
   // Add more entries here as other images become available
-  // e.g., 'cocktail_old_fashioned.png': require('../../assets/images/cocktails/old_fashioned.png'),
+  // e.g., 'cocktail_old_fashioned.png': require('../assets/images/cocktails/old_fashioned.png'),
 };
 
 const DynamicImage: React.FC<DynamicImageProps> = ({
