@@ -33,28 +33,37 @@ export function ThemedText({
   );
 }
 
+import { Colors } from '@/constants/Colors'; // Import Colors for the link
+
 const styles = StyleSheet.create({
   default: {
     fontSize: 16,
     lineHeight: 24,
+    // Assuming system default sans-serif is acceptable for body text
+    // fontFamily: 'HelveticaNeue-Light', // Example if a specific light sans-serif was desired
   },
   defaultSemiBold: {
     fontSize: 16,
     lineHeight: 24,
     fontWeight: '600',
+    // fontFamily: 'HelveticaNeue-Light',
   },
   title: {
     fontSize: 32,
-    fontWeight: 'bold',
-    lineHeight: 32,
+    fontWeight: 'bold', // Keep bold for strong titles
+    lineHeight: 38, // Adjusted line height for serif
+    fontFamily: Platform.OS === 'ios' ? 'Georgia' : 'serif', // Georgia for iOS, fallback to generic serif
   },
   subtitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 22, // Slightly increased size for subtitles
+    fontWeight: 'normal', // Normal weight for a more elegant serif subtitle
+    lineHeight: 28, // Adjusted line height
+    fontFamily: Platform.OS === 'ios' ? 'Georgia' : 'serif',
   },
   link: {
     lineHeight: 30,
     fontSize: 16,
-    color: '#0a7ea4',
+    color: Colors.dark.tint, // Use the new tint color for links
+    // fontFamily: 'HelveticaNeue-Light',
   },
 });
